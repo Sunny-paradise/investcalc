@@ -1,1 +1,11 @@
-
+{
+    "scenario_name": "Cloud (SaaS) - Sunny Paradise",
+    "period_years": 5,
+    
+    "capex": 200000,
+    "subscription_annual": 900000,
+    "training": 150000,
+    
+    "savings_annual": 1500000,
+    "revenue_growth_annual": 1200000
+}
