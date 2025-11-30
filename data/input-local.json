@@ -1,11 +1,11 @@
 {
     "scenario_name": "Local (On-Premise) - Sunny Paradise",
-    "period_years": 5,
+    "period": 5,
     
     "capex": 3400000,
-    "opex_annual": 500000,
+    "opex": 500000,
     "training": 200000,
     
-    "savings_annual": 1500000,
-    "revenue_growth_annual": 800000
+    "savings": 1500000,
+    "revenue": 800000
 }
