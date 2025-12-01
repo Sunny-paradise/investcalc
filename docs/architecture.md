@@ -1,11 +1,7 @@
-flowchart TB
-    c1-->a2
-    subgraph one
-    a1-->a2
-    end
-    subgraph two
-    b1-->b2
-    end
-    subgraph three
-    c1-->c2
-    end
+```mermaid
+graph TD;
+    A[Клиент / браузер] --> B[REST API InvertCalc]
+    B --> C[Сервис расчетов]
+    C --> D[Модуль генерации отчетов]
+    C --> E[Хранилище данных ПК]
+    B --> F[Контейнер Docker]
