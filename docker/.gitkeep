@@ -1,1 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "master", "develop"]
+  pull_request:
+    branches: ["main", "master", "develop"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build ServiceDesk.Api
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Restore
+        run: dotnet restore ./DKIP-InvestCalc-GroupProjectSharp/ppSIS/ServiceDesk.Api/ServiceDesk.Api.csproj
+
+      - name: Build
+        run: dotnet build ./DKIP-InvestCalc-GroupProjectSharp/ppSIS/ServiceDesk.Api/ServiceDesk.Api.csproj -c Release --no-restore
+
+      - name: Test (skip if no tests)
+        run: |
+          if ls **/*Tests*.csproj 1> /dev/null 2>&1; then
+            dotnet test -c Release --no-build --verbosity normal
+          else
+            echo "No test projects found. Skipping tests."
+          fi
+
+  docker-build:
+    name: Docker build
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t servicedesk-api:ci ./DKIP-InvestCalc-GroupProjectSharp/ppSIS/ServiceDesk.Api
 
